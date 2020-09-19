@@ -1,12 +1,11 @@
 
 package ejerciciotelepeaje;
 
-import java.time.LocalTime;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import ticket.BandaHoraria;
+import java.time.LocalDateTime;
+import ticket.AbstractTicket;
+import ticket.DecoratorTicketHorario;
+import ticket.Ticket;
 import vehiculos.FabricaDirectorVehiculo;
-import ventanas.Login;
 
 /**
  *
@@ -20,7 +19,9 @@ public class EjercicioTelepeaje {
     public static void main(String[] args) 
     {
         
+        AbstractTicket ticket = new DecoratorTicketHorario ( new Ticket ( LocalDateTime.now(), FabricaDirectorVehiculo.getInstance().getVehiculo(FabricaDirectorVehiculo.Vehiculos.MOTO) ) );
         
+        System.out.println ( ticket.getMonto() );
         
     }
     

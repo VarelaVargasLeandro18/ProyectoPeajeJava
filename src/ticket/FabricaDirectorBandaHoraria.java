@@ -4,6 +4,7 @@ package ticket;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
@@ -48,8 +49,10 @@ public class FabricaDirectorBandaHoraria
         return this.bandasHorarias.get(i);
     }
     
-    public BandaHoraria getBandaHorariaporHora ( LocalTime hora )
+    public BandaHoraria getBandaHorariaporHora ( LocalDateTime hora )
     {
+        
+        LocalTime horaEnHoras = hora.toLocalTime();
         
         for ( BandaHoraria bh : this.bandasHorarias )
         {
@@ -57,7 +60,7 @@ public class FabricaDirectorBandaHoraria
             LocalTime inicio = bh.getInicio();
             LocalTime fin = bh.getFin();
             
-            if ( hora.compareTo ( inicio ) > 0 && hora.compareTo ( fin ) < 0 )
+            if ( horaEnHoras.compareTo ( inicio ) > 0 && horaEnHoras.compareTo ( fin ) < 0 )
                 return bh;
             
         }

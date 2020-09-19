@@ -12,7 +12,7 @@ public abstract class AbstractTicket
 {
     
     public abstract double getMonto();
-    public abstract LocalDate getFecha();
+    public abstract LocalDateTime getFecha();
     public abstract Vehiculo getVehiculo();
     
     protected abstract void setMonto( double Monto );

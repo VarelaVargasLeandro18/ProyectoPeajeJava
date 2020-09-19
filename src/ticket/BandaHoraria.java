@@ -50,7 +50,7 @@ public class BandaHoraria
         return this.Fin.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
     }
     
-    public String getStrTipo()
+    public String getTipo()
     {
         return this.Tipo;
     }
