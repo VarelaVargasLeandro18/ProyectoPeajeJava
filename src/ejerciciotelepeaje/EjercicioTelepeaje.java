@@ -1,6 +1,8 @@
 
 package ejerciciotelepeaje;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import vehiculos.FabricaDirectorVehiculo;
 import ventanas.Login;
 

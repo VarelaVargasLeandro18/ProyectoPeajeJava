@@ -5,6 +5,7 @@
  */
 package ventanas;
 
+import cajero.Cajero;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,10 +21,10 @@ public class Peaje extends JFrame
     //private final int cantidadVehiculos = FabricaDirectorVehiculo.Vehiculos.values().length;
     //private JButton[] botonesVehiculos = new JButton [this.cantidadVehiculos];
     
-    public Peaje ( String DNI )
+    public Peaje ( Cajero cajero )
     {
         
-        super ( "Peaje " + DNI );
+        super ( "Peaje " + cajero.getDNI() );
         this.configuraciones();
         //this.ConfigurarBotones();
         

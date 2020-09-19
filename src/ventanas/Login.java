@@ -1,6 +1,7 @@
 
 package ventanas;
 
+import cajero.Cajero;
 import conexionBD.accesoADatos;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -19,12 +20,11 @@ import javax.swing.JTextField;
 public final class Login extends JFrame
 {
     
-    private final accesoADatos chequeoUsuario = accesoADatos.getInstance();
     private JTextField jtbUsuario;
-    private JPasswordField jtbContrasenia;
-    private boolean logCorrecto = false;
-    
+    private JPasswordField jpfContrasenia;
     private JButton jbIngresar;
+    
+    private boolean ingresoCorrecto = false;
     
     public Login()
     {
@@ -51,34 +51,16 @@ public final class Login extends JFrame
     {
         
         this.jtbUsuario = new JTextField (20);
-        this.jtbContrasenia = new JPasswordField (20);
+        this.jpfContrasenia = new JPasswordField (20);
         this.jbIngresar = new JButton ( "Ingresar" );
         
         this.jbIngresar.addActionListener ( (ActionEvent l) -> {
             
-            String checkUsuario = Login.this.jtbUsuario.getText();
-            String checkContrasenia = new String ( Login.this.jtbContrasenia.getPassword() ); // No debería usarse así, pero bueno xD
-            System.out.println("------------------------------------------------");
-            System.out.println ( "Usuario: " + checkUsuario + "\tContraseña: " + checkContrasenia );
-            System.out.println("------------------------------------------------");
-            
-            try
+            if ( Cajero.Validar( Login.this.jtbUsuario.getText(),  Login.this.jpfContrasenia.getPassword() ) )
             {
-                
-                List<String> existeUsuario;
-                existeUsuario = Login.this.chequeoUsuario.consultarProcedure ( "CALL getCajerosDNI ( \"" + checkUsuario + "\", \"" +  checkContrasenia + "\" );" );
-                Login.this.logCorrecto = existeUsuario.size() > 0;
-                
-                if ( Login.this.logCorrecto )
-                {
-                    new Peaje( existeUsuario.get(0) ).Mostrar();
-                    Login.this.dispose();//Tal vez sacarlo.
-                }
-                
-            }
-            catch ( SQLException ex )
-            {
-                System.out.println ( ex.getMessage() );
+                this.ingresoCorrecto = true;
+                new Peaje ( Cajero.getInstance() ).Mostrar();
+                this.dispose();
             }
             
         });
@@ -86,7 +68,7 @@ public final class Login extends JFrame
         this.add ( new JLabel ( "Usuario: " ) );
         this.add(this.jtbUsuario);
         this.add ( new JLabel ( "Contraseña: " ) );
-        this.add(this.jtbContrasenia);
+        this.add(this.jpfContrasenia);
         this.add(this.jbIngresar);
         
     }
@@ -101,9 +83,7 @@ public final class Login extends JFrame
     
     public boolean getIngresoCorrecto()
     {
-        
-        return this.logCorrecto;
-        
+        return this.ingresoCorrecto;
     }
     
 }

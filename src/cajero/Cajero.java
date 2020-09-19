@@ -1,6 +1,13 @@
 
 package cajero;
 
+import conexionBD.accesoADatos;
+import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
+import ventanas.Login;
+import ventanas.Peaje;
+
 /**
  *
  * @author bapo
@@ -12,23 +19,43 @@ public class Cajero
     
     private int DNI;
     
-    private Cajero () {}
+    private Cajero ( int DNI ) { this.DNI = DNI; }
     
-    public static boolean Validar ( String Usuario, String Password)
+    public static boolean Validar ( String Usuario, char[] Password)
     {
+        System.out.println (Password);
+        boolean logCorrecto = false;
+        int DNI;
         
-        return true;
+        try
+        {
+
+            List<String> existeUsuario;
+            existeUsuario = accesoADatos.getInstance().consultarProcedure ( "CALL getCajerosDNI ( \"" + Usuario + "\", \"" + String.copyValueOf(Password) + "\" );" );
+            logCorrecto = existeUsuario.size() > 0;
+                System.out.println ( "DNI de Usuario: " + existeUsuario );
+            
+            if (logCorrecto)
+            {
+                DNI = Integer.parseInt ( existeUsuario.get(0) );
+                Cajero.cajero = new Cajero (DNI);
+            }
+            else
+                Cajero.cajero = null;
+
+        }
+        catch ( SQLException ex )
+        {
+            System.out.println ( ex.getMessage() );
+        }
+        
+        return logCorrecto;
         
     }
     
     public static Cajero getInstance ()
     {
-        
-        if ( cajero == null )
-            cajero = new Cajero();
-        
         return cajero;
-        
     }
     
     public int getDNI ()
