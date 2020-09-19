@@ -24,7 +24,7 @@ public class FabricaDirectorVehiculo
         PESADO_DOS_EJES,
         PESADO_TRES_EJES,
         PESADO_CUATRO_EJES,
-        PESADO_CINCO_A_SIETE_EJES
+        PESADO_CINCO_A_SIETE_EJES;
     
     }
     
@@ -58,7 +58,5 @@ public class FabricaDirectorVehiculo
         return this.vehiculos.get(v.ordinal());
         
     }
-    
-    
     
 }

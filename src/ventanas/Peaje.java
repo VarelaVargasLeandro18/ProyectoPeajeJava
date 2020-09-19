@@ -18,15 +18,17 @@ import vehiculos.FabricaDirectorVehiculo;
 public class Peaje extends JFrame
 {
     
-    //private final int cantidadVehiculos = FabricaDirectorVehiculo.Vehiculos.values().length;
-    //private JButton[] botonesVehiculos = new JButton [this.cantidadVehiculos];
+    private final int cantidadVehiculos = FabricaDirectorVehiculo.Vehiculos.values().length;
+    private final JButton[] botonesVehiculos = new JButton [this.cantidadVehiculos];
+    private final Cajero cajero;
     
     public Peaje ( Cajero cajero )
     {
         
         super ( "Peaje " + cajero.getDNI() );
+        this.cajero = cajero;
         this.configuraciones();
-        //this.ConfigurarBotones();
+        this.ConfigurarBotones();
         
     }
     
@@ -41,21 +43,23 @@ public class Peaje extends JFrame
         
     }
     
-//    private void ConfigurarBotones()
-//    {
-//        
-//        for ( int i = 0; i < this.cantidadVehiculos; i++ )
-//        {
-//            
-//            this.botonesVehiculos[i] = new JButton ( FabricaDirectorVehiculo.Vehiculos.values()[i].gettipoVehiculo() );
-//            
-//            //this.botonesVehiculos[i].addActionListener( (ActionEvent l) -> {} );
-//            
-//            this.add( this.botonesVehiculos[i] );
-//            
-//        }
-//        
-//    }
+    private void ConfigurarBotones()
+    {
+        
+        for ( int i = 0; i < this.cantidadVehiculos; i++ )
+        {
+            
+            String nombreBoton = FabricaDirectorVehiculo.getInstance().getVehiculo(FabricaDirectorVehiculo.Vehiculos.values()[i]).getDescripcion();
+            
+            this.botonesVehiculos[i] = new JButton ( nombreBoton );
+            
+            //this.botonesVehiculos[i].addActionListener( (ActionEvent l) -> {} );
+            
+            this.add( this.botonesVehiculos[i] );
+            
+        }
+        
+    }
     
     public Peaje Mostrar()
     {

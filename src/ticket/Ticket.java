@@ -5,6 +5,9 @@ package ticket;
  *
  * @author bapo
  */
-public class Ticket {
+public class Ticket
+{
+    
+    
     
 }

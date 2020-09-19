@@ -1,8 +1,10 @@
 
 package ejerciciotelepeaje;
 
+import java.time.LocalTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import ticket.BandaHoraria;
 import vehiculos.FabricaDirectorVehiculo;
 import ventanas.Login;
 
@@ -18,7 +20,7 @@ public class EjercicioTelepeaje {
     public static void main(String[] args) 
     {
         
-        Login p = new Login().Mostrar();
+        
         
     }
     
