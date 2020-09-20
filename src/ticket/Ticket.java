@@ -11,16 +11,13 @@ import vehiculos.Vehiculo;
 public class Ticket extends AbstractTicket
 {
     
-    private double Monto;
-    private final LocalDateTime Fecha;
-    private final Vehiculo Vehiculo;
-    private boolean telepase;
-    
-    public Ticket ( LocalDateTime Fecha, Vehiculo vehiculo )
+    public Ticket ( LocalDateTime Fecha, Vehiculo vehiculo, int DNI )
     {
+        this.DNI = DNI;
         this.Fecha = Fecha;
         this.Vehiculo = vehiculo;
         this.Monto = this.Vehiculo.getPrecioNoPico();
+        this.telepase = false;
     }
     
     @Override

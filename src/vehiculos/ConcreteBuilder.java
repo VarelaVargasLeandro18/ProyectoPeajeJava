@@ -20,7 +20,6 @@ public class ConcreteBuilder
     {
         
         List<String> tarifas = accesoADatos.getInstance().consultarProcedure("CALL getTarifasVehiculo( " + id +" )");
-        
         this.descripcion = accesoADatos.getInstance().consultarProcedure("CALL getTipoVehiculo( " + id + " )").get(0);
         this.Precio_HoraNoPico = Double.parseDouble(tarifas.get(0));
         this.Precio_HoraPico = Double.parseDouble(tarifas.get(1));

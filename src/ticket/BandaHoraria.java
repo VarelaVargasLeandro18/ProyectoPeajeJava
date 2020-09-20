@@ -24,8 +24,8 @@ public class BandaHoraria
         
         List<String> datos = accesoADatos.getInstance().consultarProcedure("CALL getBandaHorariaID( " + ID + " )");
         this.ID = Integer.parseInt(datos.get(0));
-        this.Inicio = LocalTime.parse ( datos.get(1) , DateTimeFormatter.ofPattern( "HH:mm:ss" ) );
-        this.Fin = LocalTime.parse ( datos.get(2) , DateTimeFormatter.ofPattern( "HH:mm:ss" ) );
+        this.Inicio = LocalTime.parse ( datos.get(1) , DateTimeFormatter.ISO_LOCAL_TIME );
+        this.Fin = LocalTime.parse ( datos.get(2) , DateTimeFormatter.ISO_LOCAL_TIME );
         this.Tipo = datos.get(3);    
         
     }

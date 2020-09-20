@@ -7,9 +7,16 @@ package ventanas;
 
 import cajero.Cajero;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.time.LocalDateTime;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import ticket.AbstractTicket;
+import ticket.DecoratorTicketHorario;
+import ticket.Ticket;
 import vehiculos.FabricaDirectorVehiculo;
+import vehiculos.Vehiculo;
 
 /**
  *
@@ -53,7 +60,31 @@ public class Peaje extends JFrame
             
             this.botonesVehiculos[i] = new JButton ( nombreBoton );
             
-            //this.botonesVehiculos[i].addActionListener( (ActionEvent l) -> {} );
+            this.botonesVehiculos[i].addActionListener( (ActionEvent l) -> {
+                
+                AbstractTicket ticket = null;
+                AbstractTicket ticketConPico = null;
+                
+                for (FabricaDirectorVehiculo.Vehiculos value : FabricaDirectorVehiculo.Vehiculos.values()) 
+                {
+                    
+                    Vehiculo vehiculo;
+                    
+                    if ( value.name().toLowerCase().equals(l.getActionCommand().toLowerCase()) )
+                    {
+                        vehiculo = FabricaDirectorVehiculo.getInstance().getVehiculo(value);
+                        System.out.println(vehiculo.getDescripcion() + " " + vehiculo.getPrecioNoPico());
+                        ticket = new Ticket ( LocalDateTime.now(), vehiculo, this.cajero.getDNI() );
+                        ticketConPico = new DecoratorTicketHorario (ticket);
+                        
+                        if ( !ticketConPico.IngresarTicket() )
+                            JOptionPane.showMessageDialog( Peaje.this, "No se pudo realizar la operación", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        
+                    }
+                    
+                }
+                
+            } );
             
             this.add( this.botonesVehiculos[i] );
             

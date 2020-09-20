@@ -22,7 +22,7 @@ public class FabricaDirectorBandaHoraria
         
         try
         {
-            for ( int i = 0; i < 4; i++ )
+            for ( int i = 0; i < 5 ; i++ )
             {
                 this.bandasHorarias.add ( new BandaHoraria ( i ) );
             }
@@ -57,13 +57,18 @@ public class FabricaDirectorBandaHoraria
         for ( BandaHoraria bh : this.bandasHorarias )
         {
             
-            LocalTime inicio = bh.getInicio();
-            LocalTime fin = bh.getFin();
-            
-            if ( horaEnHoras.compareTo ( inicio ) > 0 && horaEnHoras.compareTo ( fin ) < 0 )
+            if ( Boolean.logicalAnd(horaEnHoras.isAfter ( bh.getInicio() ), horaEnHoras.isBefore ( bh.getFin() )) )
+            {
                 return bh;
+            }
+            else if ( horaEnHoras.equals ( bh.getInicio() ) || horaEnHoras.equals ( bh.getFin() ) )
+            {
+                return bh;
+            }
             
         }
+        
+        System.out.println ( "NULL" );
         
         return null;
         
